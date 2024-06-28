@@ -12,6 +12,12 @@ const PORT = process.env.PORT || 5000;
 
 app.use(express.json());
 
+app.use(cors({
+  origin: process.env.FRONTEND_URL,
+  methods: ['GET', 'POST'],
+  allowedHeaders: ['Content-Type']
+}))
+
 app.use((req, res, next) => {
   console.log(req.path, req.method)
   next()
