@@ -1,0 +1,15 @@
+{
+  "name": "crud-app-backend",
+  "version": "1.0.0",
+  "description": "Backend for CRUD App",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon server.js"
+  },
+  "author": "Elias",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
