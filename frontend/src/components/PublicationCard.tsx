@@ -1,4 +1,6 @@
+import { useMutation, useQueryClient } from "react-query";
 import { Button } from "./ui/button";
+import deletePublication from "../lib/mutations/deletePublication";
 
 type Publication = {
   _id: string;
@@ -10,8 +12,14 @@ type Publication = {
 const PublicationCard = ({ publication }: { publication: Publication }) => {
   const { title, student_id, year, _id } = publication;
 
+  const queryClient = useQueryClient();
+  const mutation = useMutation(deletePublication, {
+    onSuccess: () => {
+    queryClient.refetchQueries("publications")
+    }})
+
   const onPress = async () => {
-    console.log("Delete", _id)
+    mutation.mutate(_id)
   };
 
   return (
