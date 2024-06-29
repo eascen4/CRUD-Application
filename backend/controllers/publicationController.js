@@ -9,7 +9,6 @@ export async function getPublications(req, res) {
 }
 
 export async function createPublication(req, res) {
-
   const { title, student_id, year } = req.body;
 
   if (!student_id || !title || !year) {
@@ -17,14 +16,14 @@ export async function createPublication(req, res) {
     return res.status(400).json({ message: "All fields are required" });
   }
 
-  if(!mongoose.Types.ObjectId.isValid(student_id)) {
+  if (!mongoose.Types.ObjectId.isValid(student_id)) {
     console.log("Invalid student ID");
     return res.status(400).json({ message: "Invalid student ID" });
   }
 
   const student = await User.findById(student_id);
-  
-  if(!student) {
+
+  if (!student) {
     console.log("Student not found");
     return res.status(404).json({ message: "Student not found" });
   }
@@ -51,7 +50,7 @@ export async function deletePublication(req, res) {
     return res.status(400).json({ message: "Publication ID is required" });
   }
 
-  if(!mongoose.Types.ObjectId.isValid(id)) {
+  if (!mongoose.Types.ObjectId.isValid(id)) {
     console.log("Invalid publication ID");
     return res.status(400).json({ message: "Invalid publication ID" });
   }
@@ -72,4 +71,34 @@ export async function deletePublication(req, res) {
     console.log("Error deleting publication", error.message);
     return res.status(401).json({ message: error.message });
   }
+}
+
+export async function updatePublication(req, res) {
+  const { _id, student_id, title, year } = req.body;
+
+  if (
+    !mongoose.Types.ObjectId.isValid(_id) ||
+    !mongoose.Types.ObjectId.isValid(student_id) ||
+    !_id ||
+    !student_id ||
+    !title ||
+    !year
+  ) {
+    console.log("Invalid IDs");
+    return res.status(400).json({ message: "Invalid IDs" });
+  }
+
+  const student = await User.findById(student_id);
+
+  if (!student) {
+    console.log("Student not found");
+    return res.status(404).json({ message: "Student not found" });
+  }
+
+  const publication = await Publication.findByIdAndUpdate(
+    _id,
+    { student_id, title, year },
+    { new: true }
+  );
+  return res.status(200).json(publication);
 }
