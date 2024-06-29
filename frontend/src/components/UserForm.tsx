@@ -44,6 +44,10 @@ const UserForm = () => {
   }
 
   return (
+    <section className="flex-1 px-4 max-w-screen-md w-full">
+      <h1 className="text-semibold text-3xl text-center pt-10 pb-5">
+        Add a User{" "}
+      </h1>
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
         <FormField
@@ -89,6 +93,7 @@ const UserForm = () => {
         <Button type="submit">Submit</Button>
       </form>
     </Form>
+    </section>
   );
 };
 export default UserForm;

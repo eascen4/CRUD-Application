@@ -16,7 +16,7 @@ const PublicationCard = ({ publication }: { publication: Publication }) => {
     useState<Publication>(publication);
   const { title, student_id, year, _id } = updatedPublication;
 
-  const hasBeenUpdated = publication !== updatedPublication;
+  const hasBeenUpdated = JSON.stringify(publication) !== JSON.stringify(updatedPublication);
   console.log(hasBeenUpdated);
 
   const queryClient = useQueryClient();
@@ -42,11 +42,11 @@ const PublicationCard = ({ publication }: { publication: Publication }) => {
 
   return (
     <div className="rounded-lg p-3 bg-slate-700 flex justify-between items-center">
-      <div>
-        <h2>
-          Title:{" "}
-          <input
-            className="bg-transparent"
+      <div className="flex-1">
+        <h2 className="flex gap-1">
+          Title:
+          <input 
+            className="bg-transparent flex-1"
             value={title}
             onChange={(e) =>
               setUpdatedPublication({
@@ -57,7 +57,7 @@ const PublicationCard = ({ publication }: { publication: Publication }) => {
           />
         </h2>
         <p>
-          Title:{" "}
+          Year:{" "}
           <input
             className="bg-transparent"
             value={year}

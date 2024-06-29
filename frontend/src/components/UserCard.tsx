@@ -24,7 +24,7 @@ const UserCard = ({ user }: { user: User }) => {
 
   return (
     <div className="rounded-lg p-3 bg-slate-700 flex justify-between items-center">
-      <div>
+      <div className="flex-1">
         <h2>Name: {first_name + " " + last_name}</h2>
         <p>Email: {email}</p>
         <p>Student ID: {_id}</p>
