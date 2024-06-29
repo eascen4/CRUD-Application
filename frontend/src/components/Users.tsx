@@ -16,7 +16,7 @@ const Users = () => {
   return (
     <section className="max-w-screen-xl bg-slate-600 mx-auto p-4 flex flex-col gap-2">
       {status === "success" ? data.map((user : User) => (
-        <UserCard user={user}/>
+        <UserCard key={user._id} user={user}/>
       )) : <p>Loading...</p>}
     </section>
   );

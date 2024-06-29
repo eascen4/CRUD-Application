@@ -1,5 +1,6 @@
 import PublicationForm from "./components/PublicationForm";
 import Publications from "./components/Publications";
+import UserForm from "./components/UserForm";
 import Users from "./components/Users";
 
 const App = () => {
@@ -12,7 +13,10 @@ const App = () => {
         <Publications />
         <Users />
       </div>
-      <PublicationForm />
+      <div className=" flex flex-col xl:flex-row">
+        <PublicationForm />
+        <UserForm />
+      </div>
     </main>
   );
 };
