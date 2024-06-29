@@ -1,14 +1,14 @@
-import { QueryClient, QueryClientProvider } from "react-query";
-import Publications from "./Publications";
-
+import PublicationForm from "./components/PublicationForm";
+import Publications from "./components/Publications";
 
 const App = () => {
-  const queryClient = new QueryClient();
 
   return (
-    <QueryClientProvider client={queryClient}>
+    <main className="bg-slate-800 text-slate-50 min-h-screen relative">
+      <h1 className="text-semibold text-3xl text-center pt-10 pb-5">Publications</h1>
       <Publications />
-    </QueryClientProvider>
+      <PublicationForm />
+    </main>
   );
 };
 export default App;
