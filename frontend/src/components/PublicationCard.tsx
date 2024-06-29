@@ -41,12 +41,12 @@ const PublicationCard = ({ publication }: { publication: Publication }) => {
   };
 
   return (
-    <div className="rounded-lg p-3 bg-slate-700 flex justify-between items-center">
+    <div className="rounded-lg p-6 bg-slate-700 flex justify-between items-center shadow-lg hover:shadow-xl transition-shadow">
       <div className="flex-1">
-        <h2 className="flex gap-1">
+        <h2 className="flex">
           Title:
           <input 
-            className="bg-transparent flex-1"
+            className="bg-transparent rounded-md flex-1 px-1"
             value={title}
             onChange={(e) =>
               setUpdatedPublication({
@@ -59,7 +59,7 @@ const PublicationCard = ({ publication }: { publication: Publication }) => {
         <p>
           Year:{" "}
           <input
-            className="bg-transparent"
+            className="bg-transparent rounded-md"
             value={year}
             type="number"
             onChange={(e) =>
@@ -73,7 +73,7 @@ const PublicationCard = ({ publication }: { publication: Publication }) => {
         <p>Student ID: {student_id}</p>
         <p>ID: {_id}</p>
       </div>
-      <div className="flex flex-col gap-1">
+      <div className="flex flex-col gap-2">
         {hasBeenUpdated && <Button onClick={onUpdate}>Update</Button>}
         <Button onClick={onPress}>Delete</Button>
       </div>
