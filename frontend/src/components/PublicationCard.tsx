@@ -26,8 +26,8 @@ const PublicationCard = ({ publication }: { publication: Publication }) => {
     <div className="rounded-lg p-3 bg-slate-700 flex justify-between items-center">
       <div>
         <h2>Title: {title}</h2>
-        <p>Student ID: {student_id}</p>
         <p>Year: {year}</p>
+        <p>Student ID: {student_id}</p>
         <p>ID: {_id}</p>
       </div>
       <Button onClick={onPress}>Delete</Button>

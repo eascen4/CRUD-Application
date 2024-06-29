@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import 'dotenv/config'
 
 import { publicationRouter } from "./routes/publication.js";
+import { userRouter } from "./routes/user.js";
 
 import cors from 'cors'
 
@@ -24,6 +25,7 @@ app.use((req, res, next) => {
 })
 
 app.use("/api/publications", publicationRouter);
+app.use("/api/users", userRouter);
 
 mongoose
   .connect(process.env.MONGO_URI)
