@@ -12,8 +12,17 @@ import {
   FormMessage,
 } from "../components/ui/form";
 import { Input } from "../components/ui/input";
-import { useMutation, useQueryClient } from "react-query";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import addPublication from "../lib/mutations/addPublication";
+import { Select, SelectContent, SelectTrigger, SelectValue, SelectItem } from "./ui/select";
+import queryUsers from "../lib/queries/queryUsers";
+
+type User = {
+  _id: string;
+  email: string;
+  first_name: string;
+  last_name: string;
+};
 
 const formSchema = z.object({
   title: z.string().min(2).max(40),
@@ -23,6 +32,8 @@ const formSchema = z.object({
 
 const PublicationForm = () => {
   const queryClient = useQueryClient();
+
+  const { data, status } = useQuery("users", queryUsers);
 
   const mutation = useMutation(addPublication, {
     onSuccess: () => {
@@ -73,13 +84,27 @@ const PublicationForm = () => {
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Student ID</FormLabel>
-                <FormControl>
-                  <Input
-                    className="text-slate-950"
-                    placeholder="abc123"
-                    {...field}
-                  />
-                </FormControl>
+                <Select
+                  value={field.value}
+                  onValueChange={field.onChange}
+                >
+                  <FormControl>
+                    <SelectTrigger className="text-slate-950">
+                      <SelectValue placeholder="Select Student" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    {status === "success" ? (
+                      data.map(({_id, first_name, last_name} : User) => (
+                        <SelectItem key={_id} value={_id}>
+                          {first_name} {last_name}
+                        </SelectItem>
+                      ))
+                    ) : (
+                      <SelectItem value="0" disabled>Loading...</SelectItem>
+                    )}
+                  </SelectContent>
+                </Select>
                 <FormMessage />
               </FormItem>
             )}
